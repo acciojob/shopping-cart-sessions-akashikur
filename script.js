@@ -83,24 +83,7 @@ cartList.addEventListener("click", (event) => {
     removeFromCart(productId);
   }
 });
-() => { 
-  // Clear the cart before starting the test
-  cy.window().its('sessionStorage').invoke('removeItem', 'cart');
 
-  // Add the first product to the cart
-  cy.get('ul#product-list').children('li').first().children('button').click();
-  cy.window().its('sessionStorage').should('have.length', 1);
-
-  // Add the second product to the cart
-  cy.get('ul#product-list').children('li').eq(1).children('button').click();
-  cy.window().its('sessionStorage').should('have.length', 1);
-
-  // Check the cart data
-  cy.window().its('sessionStorage').invoke('getItem', 'cart').should('eq', JSON.stringify([
-    { id: 1, name: 'Product 1', price: 10 },
-    { id: 2, name: 'Product 2', price: 20 }
-  ]));
-}"
 
 // Event listener for clearing the cart
 clearCartButton.addEventListener("click", clearCart);
