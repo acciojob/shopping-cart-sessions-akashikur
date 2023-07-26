@@ -40,11 +40,14 @@ function renderCart() {
 
 // Add item to cart
 function addToCart(productId) {
-  const cartData = JSON.parse(sessionStorage.getItem("cart") || "[]");
-  if (!cartData.find((item) => item.id === productId)) {
-    cartData.push({ id: productId });
-    sessionStorage.setItem("cart", JSON.stringify(cartData));
-    renderCart();
+  const productToAdd = products.find((product) => product.id === productId);
+  if (productToAdd) {
+    const cartData = JSON.parse(sessionStorage.getItem("cart") || "[]");
+    if (!cartData.find((item) => item.id === productToAdd.id)) {
+      cartData.push(productToAdd);
+      sessionStorage.setItem("cart", JSON.stringify(cartData));
+      renderCart();
+    }
   }
 }
 
